@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .todo_app{
+                /* background-color: brown; */
+                background-color: rgb(194, 193, 193);
+                padding: 12px 15px;
+            }
+            .added{
+                margin: 12px 0;
+            }
+            #input{
+                border: 0;
+                outline: none;
+                padding: 6px 12px;
+                border-radius: 4px;
+                width: 80%;
+            }
+            #input_btn{
+                outline: none;
+                border: 0;
+                padding: 6px 26px;
+                border-radius: 4px;
+                cursor: pointer;
+                color: white;
+                background-color: rgb(65, 65, 148);
+                /* background-color: rgb(43, 226, 223); */
+            }
+            ul div{
+                display: flex;
+                align-items: center;
+                white-space: normal;
+            }
+            ul div li{
+                position: relative;
+                padding: 5px 12px 5px 45px;
+                list-style: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                border: 1px solid black;
+                width: 70%;
+                /* white-space: normal; */
+            }
+            ul div li:before{
+                content: "";
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                left:12px;
+                right: 12px;
+                background-image: url('images/unchecked.png'); 
+                background-size: cover;
+            }
+
+            ul div span{
+                position: absolute;
+                right: 0;
+                font-size: 32px;
+                text-align: center;
+                width: 39px;
+                height: 39px;
+                cursor: pointer;
+            }
+            ul li.checked::before{
+                background-image: url('images/checked.png');
+            }
+            #time{
+                position: absolute;
+                right:130px
+                /* margin:  0  auto; */
+            }
+            #dates{
+                position: absolute;
+                right:50px
+            }
+
+
+    </style>
+</head>
+<body>
+    <div class="todo_app">
+          <h1 class="heading">Add Todo List:-</h1>
+          <div class="added">
+                <input type="text" id="input">
+                <button id="input_btn">Add</button>
+          </div>
+          <ul id="content">
+                <!-- <div>
+                      <li>high</li>
+                      <span></span>
+                      <p id="time">11:57:08</p>
+                      <p id="dates">30/06/2024</p>
+                </div> -->
+          </ul>
+    </div>
+
+
+<script>
+    const btn = document.getElementById("input_btn");
+    const input = document.getElementById("input");
+    const content = document.getElementById("content");
+        
+    btn.addEventListener("click", function(){
+
+        if(input.value ===""){
+            alert('kindly enter input');
+        }
+        else{
+
+            const div = document.createElement("div");
+            content.append(div);
+
+            const li = document.createElement("li");
+            li.textContent = input.value;
+            div.append(li);
+
+            const span = document.createElement("span");
+            span.innerText += "\u00d7";
+            div.append(span);
+
+            const d = new Date();
+            const sec = d.getSeconds()<9 ? `0${d.getSeconds()}`: d.getSeconds();
+            const min = d.getMinutes()<9 ? `0${d.getMinutes()}`  : d.getMinutes();
+            const hours = d.getHours()<9 ? `0${hours}`: d.getHours();
+            const time = document.createElement("p");
+            time.setAttribute("id","time");
+            time.textContent = `${hours}:${min}:${sec}`;
+            div.append(time);
+
+            const date= d.getDate();
+            const month = d.getMonth();
+            const year = d.getFullYear();
+            const dates = document.createElement("p");
+            dates.setAttribute("id","dates");
+            console.log(year);
+            dates.textContent = `${date}/0${month+1}/${year}`;
+            div.append(dates);
+            // console.log(time);
+
+            input.value  = "";
+
+        }
+    }); 
+    content.addEventListener("click", function(e){
+         if(e.target.tagName === "LI"){
+            e.target.classList.toggle("checked");   
+         }
+         else if(e.target.tagName==="SPAN"){
+            e.target.parentElement.remove();
+         }
+    });   
+</script>    
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background color change</title>
+    <style>           
+            main{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                flex-direction: column;
+            }
+            .btn{
+                font-size: 1.5rem;
+                font-weight: bold;
+                border: none;
+                outline: none;
+                padding: 12px 15px;
+                border-radius: 5px;
+                margin-bottom: 12px;
+                cursor: pointer;
+            }
+            .h1{
+                background-color: black;
+                color: #fff;
+                padding: 2px 10px;
+                border-radius: 5px;
+                margin-bottom: 12px;
+            }
+            .btn1{
+                font-size: 1.5rem;
+                font-weight: bold;
+                border: none;
+                outline: none;
+                padding: 12px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+    </style>
+<!-- <script src="112practice.js" defer></script> -->
+</head>
+<body>
+
+    <main>
+            <h1 class="h1">rgb(255,255,255)</h1>
+            <button class="btn">Text color changes</button>
+            <!-- <button class="btn1">change color</button> -->
+    </main>
+<script>
+// const btn = document.querySelector(".btn");
+// const h1 = document.querySelector(".h1");
+// function colorMaker(){
+//     let red = Math.floor( Math.random()*256);
+//     let green = Math.floor( Math.random()*256);
+//     let blue = Math.floor( Math.random()*256);
+//     let rgb = `rgb(${red}, ${green}, ${blue})`;
+
+//     // document.body.style.backgroundColor = rgb;
+//     // btn.style.color = rgb;
+//     return rgb;
+// }
+
+// function colorChanger(a){
+//     document.body.style.backgroundColor = a;
+//     btn.style.color = a;
+//     h1.textContent = a;
+// }
+
+
+// // function setIn(){
+// //     setInterval(()=>{
+// //         const a = colorMaker();
+// //         colorChanger(a);   
+// //     },1000);
+
+// // }
+
+// const id = setInterval(()=>{
+//     // let red = Math.floor( Math.random()*256);
+//     // let green = Math.floor( Math.random()*256);
+//     // let blue = Math.floor( Math.random()*256);
+//     // let rgb = `rgb(${red}, ${green}, ${blue})`;
+//     const a = colorMaker(); 
+//     // document.body.style.backgroundColor = a;
+//     // btn.style.color = a;
+//     colorChanger(a);
+
+// },1000);
+
+
+// function abc(){
+//     clearInterval(id);
+// }
+// document.addEventListener("mouseenter",abc);
+
+
+
+
+// btn.addEventListener("click", ()=>{
+//     // clearInterval(id);
+//     document.body.style.backgroundColor = "#fff";
+// });
+
+// document.addEventListener("mouseleave",()=>{
+
+//     document.removeEventListener("mouseenter",abc);
+//     // let id = setInterval(()=>{
+//     //    const a = colorMaker(); 
+//     //    colorChanger(a);
+//     // },1000);
+//    //   const b = colorMaker();
+//    //   document.body.style.backgroundColor = b;
+//    //   btn.style.color = b; 
+// });
+
+
+
+
+// const changeColor = document.querySelector(".btn1");
+// changeColor.addEventListener("click", ()=>{
+//     let red = Math.floor( Math.random()*256);
+//     let green = Math.floor( Math.random()*256);
+//     let blue = Math.floor( Math.random()*256);
+
+//     let rgb = `rgb(${red},${green},${blue})`;
+//     changeColor.style.backgroundColor = rgb;
+// });
+
+
+
+
+const btn = document.querySelector(".btn");
+const h1 = document.querySelector(".h1");
+function colorMaker(){
+    let red = Math.floor( Math.random()*256);
+    let green = Math.floor( Math.random()*256);
+    let blue = Math.floor( Math.random()*256);
+    let rgb = `rgb(${red}, ${green}, ${blue})`;
+
+     document.body.style.backgroundColor = rgb;
+     btn.style.color = rgb;
+     h1.innerText = rgb;
+
+    //return rgb;
+}
+
+function start(){
+    setInterval(colorMaker, 1000);
+}
+start();
+
+// function colorChanger(a){
+//     document.body.style.backgroundColor = a;
+//     btn.style.color = a;
+//     h1.textContent = a;
+// }
+
+
+// function abc(){
+//     const id = setInterval(()=>{
+//         // console.log("hello");
+//         const a = colorMaker();
+//         colorChanger(a);
+
+//     },1000);
+//     return id;
+// }
+// const a = abc();
+// console.log(a);
+
+
+// function xyz(){
+//     clearInterval(a);
+//     // console.log( yt() );
+// }
+
+// document.addEventListener("mouseenter",xyz);
+
+// document.addEventListener("mouseleave",function(){
+//     // document.removeEventListener("mouseenter",xyz);
+//     // const a = abc();
+//     abc(); 
+// });
+
+</script>
+</body>
+</html>

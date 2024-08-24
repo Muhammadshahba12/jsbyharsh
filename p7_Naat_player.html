@@ -1,0 +1,614 @@
+<!Doctype>
+<html>
+<head>
+       <title>Naat-Player/Coding-Nepal</title>
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+	   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	   <style> 
+*{
+		margin:0;
+		padding:0;
+		font-family:arial;
+		box-sizing:border-box;
+}
+
+*::after, *::before{
+		margin:0;
+		padding:0;
+}
+
+body{
+        height:100vh;				  
+		display:flex;
+		align-items:center;
+		justify-content:center;
+	    background:linear-gradient(#ff74a4 0%, #9f6ea3 100%);
+}
+.wrapper{
+		width:380px;
+		background:#fff;
+		padding:25px 35px;
+		border-radius:12px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
+		position:relative;
+}
+.wrapper i{
+		cursor:pointer;
+}
+
+.top-bar,  .progress-area .timer,
+.controls, .naat-list .header,
+.naat-list li{
+		display:flex;
+		align-items:center;
+		justify-content:space-between;
+}
+.top-bar i{
+		font-size:30px;
+		color:#515c6f;
+}
+
+.top-bar span{
+		font-size:18px;
+		color:#515c6f;
+}
+.img-area{
+		width:100%;
+		height:250px;
+		border-radius:12px;
+		box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+				  
+		margin-top:25px;
+		overflow:hidden;
+}
+.img-area img{
+		width:100%;
+		height:100%;
+		object-fit:cover;
+}
+			   
+.Naat-detail{
+		text-align:center;
+		margin:10px 0;
+		margin:30px 0;
+		color:#515c6f;
+}
+
+.Naat-detail .name{
+		font-size:20px;
+}
+.Naat-detail .name abbr{
+		text-decoration:none;
+}
+.Naat-detail .artist{
+		font-size:15px;
+		opacity:0.9;
+		line-height: 35px;
+}
+.progress-area{
+		height:6px;
+		width:100%;
+		background:#f0f0f0;
+		border-radius:50px;
+		cursor:pointer;
+}
+.progress-area .progress-bar{
+		height:inherit;
+		width:0%;
+		background:linear-gradient(90deg, #ff74a4 0%, #9f6ea3 100%);
+		border-radius:50px;
+				  
+		position:relative;
+}
+.progress-bar::after{
+		content:" ";
+		width:12px;
+		height:12px;
+		background:linear-gradient(90deg, #ff74a4 0%, #9f6ea3 100%);
+
+		position:absolute;
+		top:50%;
+		right:-5px;
+		transform:translateY(-50%);
+		border-radius:inherit;
+				  
+		opacity:0;
+		transition:0.2s ease;
+}
+.progress-area:hover .progress-bar::after{
+		opacity:1;
+}
+.progress-area .timer{
+		margin-top:2px;
+}
+.timer span{
+		font-size:13px;
+		color:#515C6F;
+}
+			   
+			   
+.controls{
+	    margin:40px 0 5px 0;
+}
+.controls i{
+		font-size:28px;
+		user-select:none;
+		background:linear-gradient(#ff74a4 0%, #9f6ea3 100%);
+				  
+		background-clip:text;
+		-webkit-background-clip:text;
+		-webkit-text-fill-color:transparent;
+}
+.controls i:nth-child(2),
+.controls i:nth-child(4){
+		font-size:43px;
+}
+.controls #prev{
+		margin-right:-13px;
+}
+.controls #next{
+		margin-left:-13px;
+}
+			   
+			   
+.controls .play-pause{
+		width:54px;
+		height:54px;
+		background:linear-gradient(#fff 0%, #cecaca 100%);
+		box-shadow:0 0 5px #ff74a4;
+				  
+		border-radius:50%;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+}
+.play-pause::before{
+		content:" ";
+		position:absolute;
+		width:43px;
+		height:43px;
+		border-radius:50%;
+		background:linear-gradient(#ff74a4 0%, #9f6ea3 100%);
+}
+.play-pause i{
+		width:43px;
+		height:43px;
+		line-height:43px;
+		text-align:center;
+				  
+		background:linear-gradient(#fff 0%, #cecaca 100%);
+		background-clip:text;
+		-webkit-background-clip:text;
+		-webkit-text-fill-color:transparent;
+		border-radius:50%;
+		position:absolute;
+}
+			   
+			   
+.naat-list{
+		position:absolute;
+		left:0;
+		bottom:-55%;
+		opacity:0;
+		pointer-events:none;
+				  
+		width:100%;
+		background:#fff;
+		color:#515c6f;
+		padding:20px 35px;
+		border-radius:15px;
+		box-shadow:0px 5px 10px rgba(0,0,0,0.2);
+				  
+		
+}
+/* We'll use this show class in Javascript */
+.naat-list.show{
+		bottom:0;
+		opacity:1;
+		pointer-events:auto;
+}
+.naat-list .header .row{
+		display:flex;
+		align-items:center;
+		font-size:19px;
+}
+.header .row i{
+		cursor:default;
+}
+.header span{
+		margin-left:5px;
+}
+.header .fa-xmark{
+		font-size:22px;
+}
+               
+.naat-list ul{
+		margin:10px 0;
+				  
+		max-height:260px;
+		overflow-y:auto;
+}
+			   
+			   
+.naat-list ul li{
+		cursor:pointer;
+		list-style:none;
+		padding-bottom:10px;
+		margin-bottom:5px;
+		border-bottom:1px solid #e5e5e5;
+}
+.naat-list ul::-webkit-scrollbar{
+		width:0px;
+}
+			   
+			   
+			   
+               			   
+.naat-list ul li:last-child{
+		border-bottom:0px;
+}
+.naat-list ul li .row span{
+		font-size:19px;
+}
+.naat-list ul li p{
+		opacity:0.9;
+}
+.naat-list ul li .audio-duration{
+        font-size:14px;
+}
+
+ul li.playing{
+		color:#9f6ea3;
+		pointer-events:none;
+}			   
+	   </style>
+</head>
+<body> 
+<div class="wrapper">
+	 <div class="top-bar">			       
+		   <i class="material-icons">expand_more</i>
+		   <span>Now Playing</span>
+		   <i class="material-icons">more_horiz</i>				   
+	 </div>
+	 <div class="img-area">
+		   <img src="" alt="sorry images does not Display">
+	 </div>
+	 <div class="Naat-detail">
+		   <p class="name"></p>
+		   <p class="artist"></p>
+	 </div>
+	 <div class="progress-area">
+		   <div class="progress-bar">
+				 <audio id="main-audio" src=""></audio>
+		   </div>
+		   <div class="timer">
+			     <span class="current">0:00</span>
+				 <span class="max-duration">0:00</span>
+		   </div>
+	 </div>
+	 <div class="controls">
+		   <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+		   <i id="prev" class="material-icons">skip_previous</i>
+		   <div class="play-pause">
+				 <i class="material-icons play">play_arrow</i>
+		   </div>
+		   <i id="next" class="material-icons">skip_next</i>
+		   <i id="more-naats" class="material-icons">queue_music</i>
+	 </div>
+			 
+	 <div class="naat-list">
+			       <div class="header">
+				         <div class="row">
+						       <i class="fa-solid fa-music"></i>
+						       <span>Naats List</span>
+						 </div>
+				         <i id="close" class="material-icons">close</i>
+				   </div>
+				   <ul>
+				       <!--
+				        <li>
+						     <div class="row">
+								   <span>Haderi sheer hn</span>
+								   <p>Hafiz Tahir Qadri</p>
+							 </div>
+							 <span class="audio-duration">3:40</span>
+						</li>
+						
+						
+						
+						
+						<li>
+						     <div class="row">
+								   <span>Haderi sheer hn</span>
+								   <p>Hafiz Tahir Qadri</p>
+							 </div>
+							 <span class="audio-duration">3:40</span>
+						</li>
+						<li>
+						     <div class="row">
+								   <span>Haderi sheer hn</span>
+								   <p>Hafiz Tahir Qadri</p>
+							 </div>
+							 <span class="audio-duration">3:40</span>
+						</li>
+						<li>
+						     <div class="row">
+								   <span>Haderi sheer hn</span>
+								   <p>Hafiz Tahir Qadri</p>
+							 </div>
+							 <span class="audio-duration">3:40</span>
+						</li>
+						<li>
+						     <div class="row">
+								   <span>Haderi sheer hn</span>
+								   <p>Hafiz Tahir Qadri</p>
+							 </div>
+							 <span class="audio-duration">3:40</span>
+						</li>
+						<li>
+						     <div class="row">
+								   <span>Haderi sheer hn</span>
+								   <p>Hafiz Tahir Qadri</p>
+							 </div>
+							 <span class="audio-duration">3:40</span>
+						</li>
+						      -->
+				   </ul>
+				   
+				   
+				   
+			       
+			 </div>
+</div>     
+       <script>
+
+let allNaats = [
+				    {
+					  name:"Meri Baat Ban Gayi Hai",
+					  artist:"Ghulam Mustafa Qadri",
+					  img:"naat-1",
+					  src:"naat-1"
+					},
+					{
+					  name:"Haderi sher hn aur nidar he Hussain(R.A)",
+					  artist:"Tahir Qadri & Brother",
+					  img:"naat-2",
+					  src:"naat-2"
+					},
+					{
+					  name:"Rahmatul lil alameen",
+					  artist:"Maher Zain",
+					  img:"naat-3",
+					  src:"naat-3"
+					},
+					{
+					  name:"wo mera Nabi(S.A.W.W) Ha",
+					  artist:"Ghulam Mustafa Qadri",
+					  img:"naat-4",
+					  src:"naat-4"
+					},
+					{
+					  name:"Wohi Khuda ha",
+					  artist:"Ahmad Raza Qadri",
+					  img:"naat-5",
+					  src:"naat-5"
+					}
+				];
+		           const wrapper = document.querySelector(".wrapper"),
+				 naatImg = wrapper.querySelector(".img-area img"),
+				 naatName = wrapper.querySelector(".Naat-detail .name"),
+				 naatArtist = wrapper.querySelector(".Naat-detail .artist"),
+			     mainAudio = wrapper.querySelector("#main-audio"),
+				 playPauseBtn = wrapper.querySelector(".play-pause"),
+				 nextBtn = wrapper.querySelector("#next"),
+				 prevBtn = wrapper.querySelector("#prev"),
+				 progressArea = wrapper.querySelector(".progress-area"),
+				 progressBar = progressArea.querySelector(".progress-bar"),
+				 naatList = wrapper.querySelector(".naat-list"),
+				 moreNaatsBtn = wrapper.querySelector("#more-naats"),
+				 closeMoreNaat = wrapper.querySelector("#close");
+
+let index = 0;
+window.addEventListener("load",function(){
+	loadNaat(index);
+
+	playingNow();
+});
+
+function loadNaat(i){
+	naatArtist.innerText = allNaats[i].artist;
+	naatName.innerText = allNaats[i].name;
+	naatImg.src = `images/${allNaats[i].img}.jpg`;
+	mainAudio.src = `media/${allNaats[i].src}.mp3`;
+}
+
+function playNaat(){
+	wrapper.classList.add("pause");
+    playPauseBtn.querySelector("i").innerText = "pause";
+	mainAudio.play();
+}
+
+function pauseNaat(){
+	wrapper.classList.remove("pause");
+    playPauseBtn.querySelector("i").innerText = "play_arrow";
+	mainAudio.pause();
+}
+
+function nextNaat(){
+    index++;
+	index>= allNaats.length? index=0: index = index;
+	loadNaat(index);
+	playNaat();
+
+	playingNow();
+}
+
+function prevNaat(){
+	index--;
+	index<0 ? index = allNaats.length-1 : index = index;
+	loadNaat(index);
+	playNaat();
+
+	playingNow();
+}
+
+playPauseBtn.addEventListener("click", function(){
+	let isNaatPlaying = wrapper.classList.contains("pause");
+	isNaatPlaying ? pauseNaat():playNaat(); 
+
+	playingNow();
+});
+
+nextBtn.addEventListener("click", function(){
+	 nextNaat();
+});
+
+prevBtn.addEventListener("click", function(){
+	prevNaat();
+});
+
+mainAudio.addEventListener("timeupdate", function(e){
+	let currentTime = e.target.currentTime;
+	let duration = e.target.duration;
+	progressBar.style.width = `${(currentTime/duration)*100}%`;
+
+	let currentTimeTag = wrapper.querySelector(".current");
+	let durationTag = wrapper.querySelector(".max-duration");
+	mainAudio.addEventListener("loadeddata", function(){
+		let time = mainAudio.duration;
+		let min = Math.floor(time/60);
+		let sec = Math.floor(time%60);
+		if(sec<10){
+			sec = `0${sec}`;
+		}
+        durationTag.innerText = `${min}:${sec}`;
+	});
+
+	let current = currentTime;
+	let totalMin = Math.floor(current/60);
+	let totalSec = Math.floor(current%60);
+	if(totalSec<10){
+		totalSec = `0${totalSec}`;
+	}
+	currentTimeTag.innerText = `${totalMin}:${totalSec}`;
+});
+
+progressArea.addEventListener("click", function(e){
+	mainAudio.currentTime = `${ (e.offsetX/progressArea.clientWidth)*mainAudio.duration}`;
+	playNaat();
+});
+
+let repeatBtn = wrapper.querySelector("#repeat-plist");
+repeatBtn.addEventListener("click", function(){
+	let getText = repeatBtn.innerText;
+	switch(getText){
+		case 'repeat':
+			          repeatBtn.innerText = "repeat_one";
+					  repeatBtn.setAttribute("title","One naat is repeated");
+					  break;
+		case 'repeat_one':
+			          repeatBtn.innerText = "shuffle";
+                      repeatBtn.setAttribute("title","every time Naat changed");
+					  break;
+		case 'shuffle':
+			          repeatBtn.innerText = "repeat";
+					  repeatBtn.setAttribute("title","playlist repeat");
+			          break;
+	}
+});
+
+mainAudio.addEventListener("ended", function(){
+    let getText = repeatBtn.innerText;
+    switch(getText){
+		case 'repeat_one':
+			        mainAudio.currentTime = 0;
+					playNaat();     
+		            break;
+		case 'repeat':
+			         nextNaat(index);
+					 playNaat();
+		             break;
+		case 'shuffle':
+			        let ran = Math.floor( Math.random()*allNaats.length); 
+					do{
+                        ran = Math.floor( Math.random()*allNaats.length);
+					}while(ran==index);
+					index = ran;
+					loadNaat(index);
+					playNaat();
+
+					playingNow();
+		             break;
+	}
+});
+
+moreNaatsBtn.addEventListener("click", ()=>{
+	naatList.classList.toggle("show");
+					
+});
+closeMoreNaat.addEventListener("click", ()=>{
+	moreNaatsBtn.click();
+});
+
+
+let ul = wrapper.querySelector("ul");
+for(let i=0; i<allNaats.length; i++){
+     let liTag = `<li li-index="${i}">
+		                <div class="row">
+                              <span>${allNaats[i].name}</span>
+							  <p>${allNaats[i].artist}</p>
+						</div>	
+						<span id="${allNaats[i].src}" class="audio_duration">5:40</span>
+						<audio class="${allNaats[i].src}" src="media/${allNaats[i].src}.mp3"></audio>
+		         </li>`;
+	ul.insertAdjacentHTML("beforeend", liTag);			 
+
+	let audioTag = wrapper.querySelector(`.${allNaats[i].src}`);
+	let audioDurationTag = ul.querySelector(`#${allNaats[i].src}`);
+
+	audioTag.addEventListener("loadeddata", function(){
+		let duration = audioTag.duration;
+		let min = Math.floor(duration/60);
+		let sec = Math.floor(duration%60);
+		if(sec<10){
+			sec = `0${sec}`;
+		} 
+		audioDurationTag.innerText = `${min}:${sec}`;
+		audioDurationTag.setAttribute("t_duration", `${min}:${sec}`);
+	});
+}
+
+
+function playingNow(){
+    let allLi = ul.querySelectorAll("li");
+
+	for(let i=0; i<allLi.length; i++){
+		let audio = allLi[i].querySelector(".audio_duration");
+		if(allLi[i].classList.contains("playing")){
+			allLi[i].classList.remove("playing");
+			let adTime = audio.getAttribute("t_duration");
+			audio.innerText = adTime;
+		}
+		if(allLi[i].getAttribute("li-index")==index){
+			allLi[i].classList.add("playing");
+			audio.innerText = "playing";
+		}
+		allLi[i].setAttribute("onclick", "clicked(this)");
+	}
+}
+
+
+function clicked(ele){
+	let getText = ele.getAttribute("li-index");
+	index = getText;
+	loadNaat(index);
+	playNaat();
+	playingNow();
+}
+
+	
+
+
+	   </script>
+</body>
+</html>

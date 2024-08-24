@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <style>
+           *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+		    }
+            .container{
+                width: 90%;
+                /* height: 35px; */
+                margin: 0 auto;
+                padding: 20px 10px;
+                background-color:#cecbca;
+
+            }
+            .create-todolist{
+                width: 100%;
+                /* background-color: lightblue; */
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                
+            }
+            .create-todolist button{
+                outline: none;
+                border:0;
+                /* margin: 0 0 0 auto; */
+                margin-top: 5px;
+                padding: 12px 75px;
+                border-radius: 5px;
+                background-color: #f44336;
+                color:#fff;
+                cursor: pointer;
+            }
+            .create-todolist input{
+                border: 0;
+                /* width: 100%; */
+                outline: 0;
+                padding: 12px 12px;
+                margin: 7px;
+                border-radius: 5px;
+            }
+            .create-todolist #title{
+                width: 100%;
+            }
+            .create-todolist #year{
+                width: 100%;
+            }
+            .list{
+            padding: 12px 5px;
+            }
+            .list-item{
+                color: #fff;
+                margin: 2px;
+            }
+            .btn-cancel{
+            padding: 2px 5px;
+            color: blue;
+            cursor:pointer;
+            }
+            .line-through{
+            padding: 2px 5px;
+            color: red;
+            cursor:pointer;
+            }
+            .line-style{
+            text-decoration: line-through;
+            }
+
+    </style>
+    <!-- <script src="112practice.js" defer></script> -->
+</head>
+<body>
+      <div class="container">
+             <div class="create-todolist">
+                  <input type="search" placeholder="Todo list title" name="" id="title">
+                  <input type="search" placeholder="Year enter" name="" id="year">
+                  <button type="submit">Add</button>
+             </div>
+             <div class="list">
+                   <h3 style="text-align: center;">Your todo list:-</h3>
+             </div>
+       </div>
+
+      <script>
+
+                const search = document.querySelector(".create-todolist #title");
+                const btn = document.querySelector(".create-todolist button");
+                const list = document.querySelector(".list");
+                const year = document.querySelector(".create-todolist #year");
+
+                var count =0;
+                btn.addEventListener( "click", ()=>{
+                    count++;
+                    const li = document.createElement("p");
+                    const clear = document.createElement("btn");
+                    const line = document.createElement("btn"); 
+                    li.setAttribute("class","list-item");
+
+                    li.textContent = count+ ".) " + search.value; 
+                    // list.append(li);
+
+                    clear.textContent = "clear";
+                    li.append(clear);
+                    
+                    clear.setAttribute("class","btn-cancel");
+                    clear.addEventListener("click",function(){
+                        // this.parentNode.remove();
+                        // console.log(this.parentNode.remove());
+                        
+                        // this.parentNode.remove();
+                        if(this.parentNode.parentNode.children.length){
+                            this.parentNode.parentNode.remove();
+                        }
+                        // count--;
+                    });
+
+                    line.textContent = "line";
+                    li.append(line); 
+                    line.setAttribute("class","line-through");
+                    line.addEventListener("click",function(){
+                        this.parentNode.classList.toggle("line-style");
+
+                    
+                        //  this.parentNode.style.toggle.textDecoration = "line-through";
+                        //  this.addEventListener("click",function(){
+                        //     this.parentNode.style.textDecoration = "none";
+                        //  });
+                    });
+
+
+                    const div = document.createElement("div");
+                    const h3 = document.createElement("h3");
+                    // const p = document.createElement("p");
+                    h3.textContent = "year is :"+ year.value;
+                    // div.append("your year is :"+year.value);
+                    div.append(h3);
+                    list.append(div);
+                    div.append(li);
+
+                    search.value = "";
+                    
+
+
+                });
+      </script>
+</body>
+</html>

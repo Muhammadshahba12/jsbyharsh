@@ -1,0 +1,162 @@
+
+
+// let a =12345n;
+// console.log(a);
+// console.log(typeof a);
+// let b = BigInt(12);
+// console.log(b);
+// console.log(typeof b); 
+
+
+//  null
+// let a  = null;
+// console.log(a);
+// console.log(typeof a);
+
+
+// undefined
+// let a;
+// console.log(a);
+// var b;
+// console.log(b);
+// console.log(typeof b);
+// const c;
+// console.log(c);
+
+
+
+
+// let a = "Muhammad";
+// let b = "Shahbaz";
+// console.log(a+" "+b);
+// console.log(`${a} ${b}`);
+
+
+
+
+// let a = 12;
+// console.log(typeof a);
+// a = String(a);
+// console.log(typeof a);
+// let d = 12;
+// console.log(typeof d);
+//  d = d + "";
+//  console.log(typeof d);
+
+// let b = "12345";
+// console.log(typeof b);
+// b = Number(b);
+// console.log(typeof b);
+// let e = "12";
+// console.log(typeof e);
+// e = +e;
+// console.log(typeof e);
+
+
+// let firstName = "M.Shahbaz";
+// let a = 12;
+// let b = null;
+// let c = undefined;
+// let d = 12n;
+// let e = true;
+// console.log(firstName);
+// console.log(a);
+// console.log(b);
+// console.log(c);
+// console.log(d);
+// console.log(e);
+
+// let firstName = " M.Shahbaz ";
+
+// let b = firstName.length;
+// console.log(b);
+
+// let a = firstName.trim();
+// console.log("After immutable string:",a);
+// console.log(firstName);
+
+// let c = firstName.toUpperCase();
+// console.log("After applying toUpperCase():",c);
+
+// let d = firstName.toLowerCase();
+// console.log("After appying toLowerCase():",d);
+
+// let e = firstName.slice(7);
+// console.log(e);
+
+
+
+
+
+// const a = 12;
+// const a = 1;
+// console.log(a);
+// let a = 12;
+// let a = 1;
+// console.log(a);
+
+
+
+
+
+// let firstName = "M.Shahbaz";
+// console.log(firstName);
+// let a b = 12;
+// console.log(a b);
+// let a$ = 12;
+// console.log(a$);
+// let $a = 12;
+// console.log($a);
+// let a_b = 12;
+// console.log(a_b);
+// let a_ = 12;
+// console.log(a_);
+// let _a = 12;
+// console.log(_a);
+// let a1 = 12;
+// console.log(a1);
+// let 1a = 12;
+// console.log(1a);
+
+
+
+
+
+// "use strict"
+// firstName = "M.shahbaz";
+// console.log(firstName);
+// firstname = "Dawood";
+// console.log(firstName);
+
+
+
+
+
+// let a = 123;
+// let a=1;
+// console.log(a);
+
+
+
+
+// var a = 123;
+// var a = 1;
+// console.log(a); 
+
+
+
+
+
+// var a = 123;
+// a = 12;
+// console.log(a);
+
+
+
+
+// console.log(`hel`);
+// console.log('hello');
+// console.log("Helo");
+
+
+

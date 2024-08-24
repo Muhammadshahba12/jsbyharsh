@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital clock</title>
+    <style>
+            *{
+                margin:0;
+                padding:0;
+                box-sizing: border-box;
+            } 
+            body{
+                background-color: #d2e2dd;
+            }
+            .container{
+                background-color: rgb(0, 191, 255);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px;
+                width: 90%;
+                height: 40vh;
+                margin: 10px auto;
+            }
+            .box{
+                /* background-color: #fff;  */
+                background-color: #051566;
+                border-radius: 50%;
+                opacity: 0.9;
+                border: 2px solid #fff;
+
+                color: #fff;
+                font-size: 40px;
+                font-weight: bold;
+                padding: 12px;
+            }
+            .dot{
+                color: #fff;
+                font-size: 40px;
+                padding: 0 5px; 
+            }
+            #format{
+                font-size: 20px;
+                margin-bottom: -20px;
+            }
+    </style>
+</head>
+<body>
+      <main class="container">
+            <div class="box" id="hr">12</div>
+            <div class="dot">:</div>
+            <div class="box" id="min">34</div>
+            <div class="dot">:</div>
+            <div class="box" id="sec">20</div>
+            <div class="dot" id="format">P.M</div>
+      </main>
+<script>
+
+function time(){
+            //  select Html elements
+    const hrsText = document.querySelector("#hr");
+    const minText = document.querySelector("#min");
+    const secText = document.querySelector("#sec");
+    const format  = document.querySelector("#format");
+    // console.log("hello");
+    const date = new Date();
+           
+            //  get Time
+    const hrs = date.getHours();
+    const min = date.getMinutes();
+    const sec = date.getSeconds();
+
+            // for "12hrs format"
+    let hrs12 = (hrs>12)? hrs%12: hrs;
+
+
+            // for single digit add "0"
+    const hrWith0 =  ( hrs12<=9?  "0"+hrs12 : hrs12 );
+    const minWith0 = ( min<=9?  "0"+min : min);        
+    const secWith0 = ( sec<=9 ? "0"+sec : sec );
+    
+    
+    const formatDecided = ( (hrs/12)<=1 ? "A.M":"P.M");
+
+            // display time
+    hrsText.textContent = hrWith0;
+    minText.textContent = minWith0;
+    secText.textContent = secWith0;
+    format.textContent = formatDecided;
+}
+setInterval( time, 1000);
+</script>      
+</body>
+</html>

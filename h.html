@@ -1,0 +1,165 @@
+<!Doctype>
+<html lang="en">
+<head>
+	   <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Count-Down</title>
+	   <style>
+	           *{
+			       margin:0;
+                   padding:0;
+                   font-family:arial;
+                   box-sizing:border-box;				   
+			   }
+			   .container{
+			       width:100%;
+				   height:100vh;
+				   background:url('images/background.png');
+				   background-position:center;
+				   background-size:cover;
+				   padding:0 8%;
+				   position:relative;
+			   }
+			   .logo{
+			       width:120px;
+				   padding:20px 0;
+				   cursor:pointer;
+			   }
+			   .content{
+			       position:absolute;
+				   top:50%;
+				   transform:translateY(-50%);
+				   color:#fff;
+			   }
+			   .content h1{
+			       font-size:64px;
+				   font-weight:500;
+			   }
+			   .content h1 span{
+			       color:#ff3751;
+			   }
+			   .content button{
+			       background:transparent;
+				   border:0;
+				   outline:none;
+				   color:#fff;
+				   border:1px solid #fff;
+				   padding:12px 30px;
+				   
+				   display:flex;
+				   align-items:center;
+				   cursor:pointer;
+			   }
+			   .content button img{
+			       width:15px;
+				   margin-left:10px;
+			   }
+			   .launch-time{
+			       display:flex;
+			   }
+			   .launch-time div{
+			       flex-basis:100px;
+				   margin:30px 0;
+			   }
+			   .launch-time div p{
+			       font-size:40px;
+				   //margin-bottom:-14px;
+			   }
+			   .rocket{
+			       position:absolute;
+                   width:120px;
+                   right:10%;
+                   bottom:0;
+                   animation:rocket 3s linear infinite;				   
+			   }
+			   @keyframes rocket{
+			       0%{
+				       bottom:0;
+					   opacity:1;
+				   }
+				   /*    50%{
+				             bottom:50%;
+				   	         opacity:0;
+				         }  
+				   */
+				   100%{
+				       bottom:105%;
+					   opacity:1;
+				   }
+			   }
+	   </style>
+</head>
+<body>
+       <div class="container">
+	         <img src="images/logo.png" class="logo">
+			 <div class="content">
+			       <p>Website is under Maintenance</p>
+				   <h1>We're <span>Launching</span> Soon</h1>
+				   <div class="launch-time">
+				         <div>
+						       <p id="days">00</p>
+							   <span>Days</span>
+						 </div>
+						 <div>
+						       <p id="hours">00</p>
+							   <span>Hours</span>
+						 </div>
+						 <div>
+						       <p id="minutes">00</p>							   
+							   <span>Minutes</span>
+						 </div>
+						 <div>
+						       <p id="seconds">00</p>
+							   <span>Seconds</span>
+						 </div>
+				   </div>
+				   <button type="button">Learn More<img src="images/triangle.png"></button>
+			 </div>
+			 <img src="images/rocket.png" class="rocket">
+	   </div>
+	   <script>
+				
+				setInterval(function(){
+
+					const dayText = document.querySelector("#days");        
+					const hrsText = document.querySelector("#hours");
+					const minText = document.querySelector("#minutes");
+					const secText = document.querySelector("#seconds");
+
+					  var future = new Date("30 september,2024 24:00:00").getTime();
+				      var now = new Date().getTime();
+					  var diff = (future - now)/1000;
+
+						  
+					if(diff>=0){
+							const day = Math.floor( (diff/ 3600 /24) );
+							const hrs = Math.floor( (diff/3600 ) % 24 );
+							const min = Math.floor( (diff/ 60) % 60 );
+							const sec = Math.floor( diff%60 );
+
+							console.log(day, hrs, min, sec);
+						
+							
+										// for single digit add "0"
+								const dayWith0 = ( day<=9?  "0"+day : day );        
+								const hrWith0 =  ( hrs<=9?  "0"+hrs : hrs );
+								const minWith0 = ( min<=9?  "0"+min : min);        
+								const secWith0 = ( sec<=9 ? "0"+sec : sec );
+						
+						
+									// display time
+							dayText.textContent = dayWith0;        
+							hrsText.textContent = hrWith0;
+							minText.textContent = minWith0;
+							secText.textContent = secWith0;
+					}
+					else{
+							dayText.textContent = "00";        
+							hrsText.textContent = "00";
+							minText.textContent = "00";
+							secText.textContent = "00";
+					}
+				},1000);
+	   </script>
+</body>
+</html>

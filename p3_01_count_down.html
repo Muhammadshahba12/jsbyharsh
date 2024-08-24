@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            *{
+                margin:0;
+                padding:0;
+                box-sizing: border-box;
+            } 
+            body{
+                background-color: #56c4e5;
+            }
+            .container{
+                background-color: rgb(234, 185, 107);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 12px 15px;
+                margin: 20px;
+                height: 30vh;
+            }
+            .box{
+                /* background-color: #fff; */
+                background-color: #1b0c8d;
+                border-radius: 50%;
+                opacity: 0.9;
+                border: 2px solid #fff;
+
+                color: #fff;
+                font-size: 40px;
+                font-weight: bold;
+                padding: 12px;
+            }
+            .dot{
+                color: #fff;
+                font-size: 40px;
+                padding: 0 5px;
+            }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="box" id="day">2</div>
+        <div class="dot">:</div>
+        <div class="box" id="hr">12</div>
+        <div class="dot">:</div>
+        <div class="box" id="min">34</div>
+        <div class="dot">:</div>
+        <div class="box" id="sec">20</div>
+    </main>
+<script>
+
+
+function time(){
+        //  select Html elements
+        const dayText = document.querySelector("#day");        
+        const hrsText = document.querySelector("#hr");
+        const minText = document.querySelector("#min");
+        const secText = document.querySelector("#sec");
+        const format  = document.querySelector("#format");
+    
+
+        const future = new Date("august 29 2024 24:00:00");
+        const now = new Date();
+
+        const diff = (future-now)/1000;;
+        // console.log(diff);
+
+        if(diff>=0){
+                const day = Math.floor( (diff/ 3600 /24) );
+                const hrs = Math.floor( (diff/3600 ) % 24 );
+                const min = Math.floor( (diff/ 60) % 60 );
+                const sec = Math.floor( diff%60 );
+            
+                
+                            // for single digit add "0"
+                    const dayWith0 = ( day<=9?  "0"+day : day );        
+                    const hrWith0 =  ( hrs<=9?  "0"+hrs : hrs );
+                    const minWith0 = ( min<=9?  "0"+min : min);        
+                    const secWith0 = ( sec<=9 ? "0"+sec : sec );
+            
+            
+                        // display time
+                dayText.textContent = dayWith0;        
+                hrsText.textContent = hrWith0;
+                minText.textContent = minWith0;
+                secText.textContent = secWith0;
+        }
+        else{
+                dayText.textContent = "00";        
+                hrsText.textContent = "00";
+                minText.textContent = "00";
+                secText.textContent = "00";
+        }
+}
+setInterval( time, 1000);
+
+</script>    
+</body>
+</html>

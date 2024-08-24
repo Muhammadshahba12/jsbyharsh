@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+                    body{
+                position: relative;
+            }
+            .content{
+                /* position: relative; */
+                /* left: 45%; */
+                /* border: 1px solid red;  */
+                display: inline-block;
+                height: 40vh;
+            }
+            .dot{
+                background-color: rgb(88, 88, 211);
+                width: 20px;
+                height: 22px;
+                /* border: 1px solid red; */
+                border-radius: 50%;
+                cursor: pointer;
+                
+            }
+            .img{
+                position: relative;
+                width: 90px;
+                height: 63px;
+                border-radius: 50%;
+                left: 30px;
+                top: -40px;
+                display: none;
+            }
+            .show{
+                display: block;
+            }
+            .bor{
+                border: 2px solid red;
+            }
+            
+            .container1{
+                position:absolute;
+                left:55%;
+                top: 40%;
+                /* border: 1px solid red; */
+            }
+            .container2{
+                position:absolute;
+                left:75%;
+                top: 65%;
+                /* border: 1px solid brown; */
+            }
+            .container3{
+                position:absolute;
+                left:70%;
+                top: 95%;
+                /* border: 1px solid orange; */
+            }
+            .container4{
+                position:absolute;
+                /* border: 1px solid black; */
+                left:40%;
+                top: 90%;
+            }
+            .container5{
+                position:absolute;
+                /* border: 1px solid green; */
+                left:35%;
+                top: 60%;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="container container1">
+            <p class="dot dot1"></p>
+            <img class="img img1" src="images/slider-img3.jpg">
+        </div>
+        <div class="container container2">
+            <p class="dot dot2"></p>
+            <img class="img img2" src="images/slider-img3.jpg">
+        </div>
+        <div class="container container3">
+            <p class="dot dot3"></p>
+            <img class="img img3" src="images/slider-img3.jpg">
+        </div>
+        <div class="container container4">
+            <p class="dot dot4"></p>
+            <img class="img img4" src="images/slider-img3.jpg">
+        </div>
+        <div class="container container5">
+            <p class="dot dot5"></p>
+            <img class="img img5" src="images/slider-img3.jpg">
+        </div>
+</div>    
+  
+    
+<script>
+    const dot1 = document.querySelector(".dot1");
+    const img1 = document.querySelector(".img1");
+    const dot2 = document.querySelector(".dot2");
+    const img2 = document.querySelector(".img2");
+    const dot3 = document.querySelector(".dot3");
+    const img3 = document.querySelector(".img3");
+    const dot4 = document.querySelector(".dot4");
+    const img4 = document.querySelector(".img4");
+    const dot5 = document.querySelector(".dot5");
+    const img5 = document.querySelector(".img5");
+    
+    
+    dot1.addEventListener( "click", ()=>{
+        img1.classList.toggle("show");
+        dot1.classList.toggle("bor");
+        //  img.classList.add("show");
+    });
+    dot2.addEventListener( "click", ()=>{
+        img2.classList.toggle("show");
+        dot2.classList.toggle("bor");
+        //  img.classList.add("show");
+    });
+    dot3.addEventListener( "click", ()=>{
+        img3.classList.toggle("show");
+        dot3.classList.toggle("bor");
+        //  img.classList.add("show");
+    });
+    dot4.addEventListener( "click", ()=>{
+        img4.classList.toggle("show");
+        dot4.classList.toggle("bor");
+        //  img.classList.add("show");
+    });
+    dot5.addEventListener( "click", ()=>{
+        img5.classList.toggle("show");
+        dot5.classList.toggle("bor");
+        //  img.classList.add("show");
+    });
+</script>    
+</body>
+</html>

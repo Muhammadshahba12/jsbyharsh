@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body{
+                background-color: rgb(7, 7, 67);
+            }
+            .quiz-app{
+                background-color: #fff;
+                width: 90%;
+                margin: 5% auto 20px;
+                border-radius: 12px;
+                padding: 4% 5%;
+                color: rgb(7, 7, 67);
+            }
+            hr{
+                width: 100%;
+                margin: 25px 0 20px;
+                background-color: rgb(7, 7, 67);
+            }
+            ul{
+                list-style-type: none;
+            }
+            .answer-btn{
+                margin:18px 0px; 
+                padding: 8px;  
+                cursor: pointer;
+                border-radius: 5px;
+                /* transition-delay: 5sec; */
+                border: 1px solid rgb(7, 7, 67);
+            }
+            .answer-btn:hover:not([disabled]){
+                background-color: black;
+                color: #fff;
+            }
+            .answer-btn:disabled{
+                cursor: no-drop;
+            }
+            .next-btn{
+                background-color:rgb(7, 7, 67);
+                border: 0;
+                outline: none;
+                color: #fff;
+                padding: 9px 35px;
+                border-radius: 5px;
+                margin: 0 auto;
+                /* display: none; */
+                cursor: pointer;
+            }
+            .correct{
+                background-color: #9aeabc;
+            }
+            .incorrect{
+                background-color: #ff9393;
+            }
+
+ 
+     
+
+    </style>
+</head>
+<body>
+       <div class="quiz-app">
+             <h2>Simple Quiz</h2>
+             <hr>
+             <h3 class="question">Which is larrrrrrrrrrrrgest animal in the world?</h3>
+             <ul class="content">
+                  <li class="answer-btn">sharrrrrrrrrrk</li>
+                  <li class="answer-btn">Blue whaleeeeeee</li>
+                  <li class="answer-btn">Elephantttttttttttt</li>
+                  <li class="answer-btn">Giraffeeeeeeeeeeeee</li>
+             </ul>
+             <button class="next-btn">Next</button>
+       </div>
+
+
+<script>
+
+
+const quest = [              
+				    {
+					   question:"Which is largest animal in the world?",
+                       answers:[
+								{text:"shark", correct:false}, 
+								{text:"Blue whale", correct:true}, 
+								{text:"Elephant", correct:false}, 
+								{text:"Giraffe", correct:false}, 
+					   ]					   
+					},
+					{
+					   question:"Which is largest desert in the world?",
+                       answers:[
+								{text:"Thal", correct:false}, 
+								{text:"Gobi", correct:false}, 
+								{text:"sahara", correct:false}, 
+								{text:"Antarctica", correct:true},
+					   ]
+					},
+					{
+					   question:"Which is largest continent in the world?",
+                       answers:[
+								{text:"Asia", correct:true}, 
+								{text:"Arctic", correct:false}, 
+								{text:"Africa", correct:false}, 
+								{text:"Austrakia", correct:false}, 
+					   ]	
+					},
+					{
+					   question:"Which is smallest continent in the world?",
+                       answers:[
+								{text:"Asia", correct:false}, 
+								{text:"Arctic", correct:false}, 
+								{text:"Africa", correct:false}, 
+								{text:"Austrakia", correct:true},
+					   ]	
+					}
+];
+
+const questionElement = document.querySelector(".question");
+const content = document.querySelector(".content");
+const answerBtn = document.querySelectorAll(".answer-btn");
+const nextBtn = document.querySelector(".next-btn");
+
+let index = 0;
+let score = 0;
+
+function showQuiz(){
+    index = 0;
+    score = 0;
+    nextBtn.style.display  = "none";
+    showQuestion();    
+}
+
+function showQuestion(){
+    reset();
+    let currentQQuestion = quest[index];
+    let questionNo = index + 1;
+    questionElement.textContent = questionNo + "." + currentQQuestion.question;
+
+    currentQQuestion.answers.forEach( answer=>{
+        // console.log(answer);
+        const li = document.createElement("li");
+        li.textContent = answer.text;
+        li.classList.add("answer-btn");
+        content.append(li);
+
+        if(answer.correct){
+            li.dataset.correct = answer.correct;
+        }
+        li.addEventListener("click", selectAnswer);
+    });
+}
+function selectAnswer(e){
+    const selectBtn = e.target;
+    const isCorrect = selectBtn.dataset.correct === "true";
+    if(isCorrect){
+        selectBtn.classList.add("correct");
+        score++;
+    }
+    else{
+        selectBtn.classList.add("incorrect");
+    }
+    Array.from(content.children).forEach( l=>{
+        if(l.dataset.correct === "true"){
+            l.classList.add("correct");
+        }
+        l.disabled = true;
+    });
+    nextBtn.style.display = "block";
+}
+
+function reset(){
+    nextBtn.style.display = "none";
+    while(content.firstChild){
+        content.removeChild(content.firstChild);
+    }
+}
+
+function showScore(){
+    reset();
+    nextBtn.style.display = "block";
+    questionElement.textContent = `your scored is ${score} out of ${quest.length}`;
+    nextBtn.textContent = "Play again";
+}
+
+function handle(){
+    index++;
+    if( index < quest.length){
+        showQuestion();
+    }
+    else{
+        showScore();
+    }
+}
+
+nextBtn.addEventListener("click", function(){
+    if(index < quest.length){
+        handle();
+    }
+    else{
+        showQuiz();
+    }
+});
+showQuiz();
+
+</script>
+</body>  
+</html>  
